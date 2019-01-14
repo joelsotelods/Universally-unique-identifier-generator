@@ -15,7 +15,7 @@ def uuid_gen():
     d = datetime.utcnow()
     unixtime = calendar.timegm(d.utctimetuple())
     timestamp_hex = hex(unixtime).split('x')[1]
-    print(timestamp_hex)
+    #print(timestamp_hex)
 
     id_lenght -= len(timestamp_hex)
 
@@ -35,8 +35,7 @@ def uuid_gen():
     return id
 
 
-print('-------------')
 ## calling the function to generate generate and print the Key.
 UUID = uuid_gen()
-print(f'->> Random UUID : {UUID}')
-print(len(UUID))
+print(f'Random UUID : {UUID}')
+print(f'Lenght: {len(UUID)}')
