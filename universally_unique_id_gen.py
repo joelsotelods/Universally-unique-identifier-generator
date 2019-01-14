@@ -2,31 +2,33 @@
 import string
 from random import randrange
 
-def uuid(id_lenght = 4, alphabet = string.ascii_letters + string.digits):
+import calendar
+from datetime import datetime
+
+def uuid_gen():
+
+    id_lenght = 36
+    alphabet = '0123456789abcdef'
+    
+    d = datetime.utcnow()
+    unixtime = calendar.timegm(d.utctimetuple())
+    timestamp_hex = hex(unixtime).split('x')[1]
+    print(timestamp_hex)
 
     id_list = []
 
     for i in range(id_lenght):
-        index = randrange(len(alphabet))
-        id_list.append(alphabet[index])
+        if i in [8-8,13-8,18-8,23-8]:
+            id_list.append('-')
+        else:
+            index = randrange(len(alphabet))
+            id_list.append(alphabet[index])
 
-    id = ''.join(id_list)    
+    id = timestamp_hex + ''.join(id_list)    
     return id
 
-print('-------------')
-UUID = uuid()
-print(f'->> Default function: {UUID}')
-print('-------------')
-lenght = 15
-UUID = uuid(lenght)
-print(f'->> Function with lenght of {lenght}: {UUID}')
-print('-------------')
-alpha = 'xyz-654'
-UUID = uuid(alphabet = alpha)
-print(f'->> Function with an Alphabet = "{alpha}": {UUID}')
-print('-------------')
-lenght = 40
-alpha = 'abxy01'
-UUID = uuid(lenght,alpha)
-print(f'->> Function with lenght of {lenght} and an Alphabet = "{alpha}": {UUID}')
 
+print('-------------')
+
+UUID = uuid_gen()
+print(f'->> Random UUID : {UUID}')
